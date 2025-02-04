@@ -3,26 +3,54 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Weather } from "./weather";
+import { Sun, Cloud, CloudRain } from "lucide-react";
 
 export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 	const [showDetails, setShowDetails] = useState(false);
 
+	console.log("weather", weather?.climate);
+
+	const getBackgroundClass = () => {
+		switch (weather?.climate) {
+			case "ensolarado":
+				return "bg-gradient-to-b from-yellow-400 to-orange-500 border-yellow-600";
+			case "nublado":
+				return "bg-gradient-to-b from-gray-300 to-gray-600 border-gray-500";
+			case "chuvoso":
+				return "bg-gradient-to-b from-blue-400 to-blue-700 border-blue-600";
+			default:
+				return "bg-gray-200 border-gray-400";
+		}
+	};
+
+	const getWeatherIcon = () => {
+		switch (weather?.climate) {
+			case "ensolarado":
+				return <Sun size={40} className="text-yellow-200 opacity-75" />;
+			case "nublado":
+				return <Cloud size={40} className="text-gray-300 opacity-75" />;
+			case "chuvoso":
+				return <CloudRain size={40} className="text-blue-300 opacity-75" />;
+			default:
+				return null;
+		}
+	};
+
 	return (
-		<div className="bg-white p-6 rounded-lg shadow-md max-w-prose mx-auto border border-gray-200">
+		<div
+			className={`p-6 rounded-lg shadow-md max-w-prose mx-auto border text-white relative overflow-hidden ${getBackgroundClass()}`}
+		>
+			<div className="absolute top-4 right-2">{getWeatherIcon()}</div>
 			<div className="space-y-4">
-				<p className="text-gray-700 text-lg font-medium">
+				<p className="text-lg font-medium drop-shadow-lg">
 					{weather?.summary || "Nenhum resumo disponível."}
 				</p>
 
 				{showDetails && (
-					<div className="space-y-2">
-						<h3 className="text-gray-800 font-semibold">Outros dias:</h3>
-						<p className="text-gray-700">
-							{weather?.yesterday || "Nenhuma previsão disponível para ontem."}
-						</p>
-
-						<p className="text-gray-700">
-							{weather?.tomorrow || "Nenhuma previsão disponível para amanhã."}
+					<div className="space-y-2 bg-white bg-opacity-20 p-4 rounded-lg backdrop-blur-md">
+						<h3 className="text-gray-100 font-semibold">Details:</h3>
+						<p className="text-gray-100">
+							{weather?.details || "Nenhuma previsão disponível para ontem."}
 						</p>
 					</div>
 				)}
@@ -31,10 +59,10 @@ export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 			<div className="mt-4">
 				<Button
 					onClick={() => setShowDetails(!showDetails)}
-					className="w-full sm:w-auto"
+					className="w-full sm:w-auto bg-white text-gray-800 hover:bg-gray-300 shadow-md"
 					variant={showDetails ? "secondary" : "default"}
 				>
-					{showDetails ? "Ocultar detalhes" : "Ver próximos dias"}
+					{showDetails ? "Hide details" : "Show details"}
 				</Button>
 			</div>
 		</div>

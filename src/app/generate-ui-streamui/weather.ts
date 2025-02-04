@@ -5,14 +5,18 @@ export const weatherSchema = z.object({
   summary: z
     .string()
     .describe(
-      "um resumo do clima na região, com a temperatura, adicione no texto o nome da cidade"
+      "uma previsão do tempo da região, com a temperatura e previsão (nublado, ensolarado ou chuvoso), adicione no texto o nome da cidade"
     ),
-  yesterday: z
+  climate: z
     .string()
-    .describe("adicione a previsão de ontem, com a temperatura inclusa"),
-  tomorrow: z
+    .describe(
+      "o tempo atual da região, descreva com apenas uma palavra (nublado, ensolarado ou chuvoso)."
+    ),
+  details: z
     .string()
-    .describe("adicione a previsão de amanhã, com a temperatura inclusa"),
+    .describe(
+      "adicione detalhes a previsão do tempo, como humidade, índices de UV se forem muito altos, qualidade do ar e etc. Seja descritivo em forma de texto"
+    ),
 });
 
 export type Weather = DeepPartial<typeof weatherSchema>;

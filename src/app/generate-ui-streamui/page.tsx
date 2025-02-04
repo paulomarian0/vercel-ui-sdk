@@ -26,7 +26,7 @@ export default function GenerateUI() {
 	const { continueConversation } = useActions();
 
 	return (
-		<div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
+		<div className="min-h-screen bg-gray-300 p-6 flex items-center justify-center">
 			<div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-6 space-y-4 mb-60">
 				<form
 					onSubmit={async (e) => {
