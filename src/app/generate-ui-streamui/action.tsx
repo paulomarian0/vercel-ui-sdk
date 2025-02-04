@@ -14,10 +14,6 @@ export interface ServerMessage {
 	content: string;
 }
 
-interface GroqChatSettings {
-	apiKey: string;
-}
-
 export interface ClientMessage {
 	id: string;
 	role: "user" | "assistant";
@@ -32,8 +28,10 @@ export async function continueConversation(
 	const history = getMutableAIState();
 
 	const model = groq("llama3-70b-8192", {
-		apiKey: process.env.GROQ_API_KEY as string,
-	});
+		...(process.env.GROQ_API_KEY && {
+			apiKey: process.env.GROQ_API_KEY as string,
+		}),
+	} as any);
 
 	const result = await streamUI({
 		model: model,
