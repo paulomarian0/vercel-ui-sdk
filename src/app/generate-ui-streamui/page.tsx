@@ -52,7 +52,7 @@ export default function GenerateUI() {
 								variant="outline"
 								role="combobox"
 								aria-expanded={open}
-								className="flex-1 justify-between text-sm sm:text-xs"
+								className="flex-1 justify-between text-sm sm:text-base lg:text-lg"
 							>
 								{input || "Search for a city..."}
 							</Button>
@@ -63,10 +63,10 @@ export default function GenerateUI() {
 									placeholder="Search for a city..."
 									value={input}
 									onValueChange={(value) => setInput(value)}
-									className="text-sm sm:text-xs"
+									className="text-sm sm:text-base lg:text-lg"
 								/>
 								<CommandList>
-									<CommandEmpty className="text-sm sm:text-xs">
+									<CommandEmpty className="text-sm sm:text-base lg:text-lg">
 										No city found.
 									</CommandEmpty>
 									{cities
@@ -81,7 +81,7 @@ export default function GenerateUI() {
 													setInput(city);
 													setOpen(false);
 												}}
-												className="text-sm sm:text-xs"
+												className="text-sm sm:text-base lg:text-lg"
 											>
 												{city}
 											</CommandItem>
@@ -91,7 +91,10 @@ export default function GenerateUI() {
 						</PopoverContent>
 					</Popover>
 
-					<Button type="submit" className="w-full sm:w-auto text-sm sm:text-xs">
+					<Button
+						type="submit"
+						className="w-full sm:w-auto text-sm sm:text-base lg:text-lg"
+					>
 						Search
 					</Button>
 				</form>
@@ -100,7 +103,7 @@ export default function GenerateUI() {
 					{conversation.map((message: ClientMessage) => (
 						<div
 							key={message.id}
-							className={`p-4 rounded-lg text-sm sm:text-xs ${
+							className={`p-4 rounded-lg text-sm sm:text-base lg:text-lg ${
 								message.role === "user"
 									? "bg-blue-50 text-blue-900 ml-auto"
 									: "bg-gray-50 text-gray-900"
