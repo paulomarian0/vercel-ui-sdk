@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ClientMessage } from "./action";
+import type { ClientMessage } from "./action";
 import { useActions, useUIState } from "ai/rsc";
 import { nanoid } from "nanoid";
 import { Button } from "@/components/ui/button";
@@ -26,8 +26,8 @@ export default function GenerateUI() {
 	const { continueConversation } = useActions();
 
 	return (
-		<div className="min-h-screen bg-gray-300 p-6 flex items-center justify-center">
-			<div className="max-w-2xl w-full bg-white rounded-lg shadow-lg p-6 space-y-4 mb-60">
+		<div className="min-h-screen bg-gray-300 p-4 sm:p-6 flex items-center justify-center">
+			<div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-4 sm:p-6 space-y-4 mb-20 sm:mb-60">
 				<form
 					onSubmit={async (e) => {
 						e.preventDefault();
@@ -44,7 +44,7 @@ export default function GenerateUI() {
 							message,
 						]);
 					}}
-					className="flex gap-2"
+					className="flex flex-col sm:flex-row gap-2"
 				>
 					<Popover open={open} onOpenChange={setOpen}>
 						<PopoverTrigger asChild>
@@ -52,7 +52,7 @@ export default function GenerateUI() {
 								variant="outline"
 								role="combobox"
 								aria-expanded={open}
-								className="flex-1 justify-between"
+								className="flex-1 justify-between text-sm sm:text-xs"
 							>
 								{input || "Search for a city..."}
 							</Button>
@@ -63,9 +63,12 @@ export default function GenerateUI() {
 									placeholder="Search for a city..."
 									value={input}
 									onValueChange={(value) => setInput(value)}
+									className="text-sm sm:text-xs"
 								/>
 								<CommandList>
-									<CommandEmpty>No city found.</CommandEmpty>
+									<CommandEmpty className="text-sm sm:text-xs">
+										No city found.
+									</CommandEmpty>
 									{cities
 										.filter((city) =>
 											city.toLowerCase().includes(input.toLowerCase()),
@@ -78,6 +81,7 @@ export default function GenerateUI() {
 													setInput(city);
 													setOpen(false);
 												}}
+												className="text-sm sm:text-xs"
 											>
 												{city}
 											</CommandItem>
@@ -87,14 +91,16 @@ export default function GenerateUI() {
 						</PopoverContent>
 					</Popover>
 
-					<Button type="submit">Search</Button>
+					<Button type="submit" className="w-full sm:w-auto text-sm sm:text-xs">
+						Search
+					</Button>
 				</form>
 
 				<div className="space-y-4">
 					{conversation.map((message: ClientMessage) => (
 						<div
 							key={message.id}
-							className={`p-4 rounded-lg ${
+							className={`p-4 rounded-lg text-sm sm:text-xs ${
 								message.role === "user"
 									? "bg-blue-50 text-blue-900 ml-auto"
 									: "bg-gray-50 text-gray-900"
