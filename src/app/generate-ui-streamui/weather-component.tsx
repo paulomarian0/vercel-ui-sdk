@@ -26,11 +26,11 @@ export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 	const getWeatherIcon = () => {
 		switch (weather?.climate) {
 			case "ensolarado":
-				return <Sun size={40} className="text-yellow-200 opacity-75" />;
+				return <Sun size={40} className="text-yellow-200 opacity-30" />;
 			case "nublado":
-				return <Cloud size={40} className="text-gray-300 opacity-75" />;
+				return <Cloud size={40} className="text-gray-300 opacity-30" />;
 			case "chuvoso":
-				return <CloudRain size={40} className="text-blue-300 opacity-75" />;
+				return <CloudRain size={40} className="text-blue-300 opacity-30" />;
 			default:
 				return null;
 		}
