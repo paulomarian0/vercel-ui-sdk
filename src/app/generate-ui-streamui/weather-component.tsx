@@ -8,15 +8,13 @@ import { Sun, Cloud, CloudRain } from "lucide-react";
 export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 	const [showDetails, setShowDetails] = useState(false);
 
-	console.log("weather", weather?.climate);
-
 	const getBackgroundClass = () => {
 		switch (weather?.climate) {
-			case "ensolarado":
+			case "sunny":
 				return "bg-gradient-to-b from-yellow-400 to-orange-500 border-yellow-600";
-			case "nublado":
+			case "cloudy":
 				return "bg-gradient-to-b from-gray-300 to-gray-600 border-gray-500";
-			case "chuvoso":
+			case "rainy":
 				return "bg-gradient-to-b from-blue-400 to-blue-700 border-blue-600";
 			default:
 				return "bg-gray-200 border-gray-400";
@@ -25,11 +23,11 @@ export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 
 	const getWeatherIcon = () => {
 		switch (weather?.climate) {
-			case "ensolarado":
+			case "sunny":
 				return <Sun size={40} className="text-yellow-200 opacity-30" />;
-			case "nublado":
+			case "cloudy":
 				return <Cloud size={40} className="text-gray-300 opacity-30" />;
-			case "chuvoso":
+			case "rainy":
 				return <CloudRain size={40} className="text-blue-300 opacity-30" />;
 			default:
 				return null;
@@ -43,7 +41,7 @@ export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 			<div className="absolute top-2 sm:top-4 right-2">{getWeatherIcon()}</div>
 			<div className="space-y-4">
 				<p className="text-base sm:text-lg lg:text-xl font-medium drop-shadow-lg">
-					{weather?.summary || "Nenhum resumo disponível."}
+					{weather?.summary || "No summary available."}
 				</p>
 
 				{showDetails && (
@@ -52,7 +50,7 @@ export const WeatherComponent = ({ weather }: { weather?: Weather }) => {
 							Details:
 						</h3>
 						<p className="text-gray-100 text-sm sm:text-base lg:text-lg">
-							{weather?.details || "Nenhuma previsão disponível para ontem."}
+							{weather?.details || "No forecast available for yesterday."}
 						</p>
 					</div>
 				)}

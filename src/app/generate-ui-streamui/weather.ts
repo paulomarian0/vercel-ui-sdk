@@ -5,17 +5,17 @@ export const weatherSchema = z.object({
   summary: z
     .string()
     .describe(
-      "uma previsão do tempo da região, com a temperatura e previsão (nublado, ensolarado ou chuvoso), adicione no texto o nome da cidade"
+      "a weather forecast for the region, including temperature and forecast (cloudy, sunny, or rainy), include the name of the city in the text"
     ),
   climate: z
     .string()
     .describe(
-      "o tempo atual da região, descreva com apenas uma palavra (nublado, ensolarado ou chuvoso)."
+      "the current weather of the region, describe with just one word (cloudy, sunny, or rainy)."
     ),
   details: z
     .string()
     .describe(
-      "adicione detalhes a previsão do tempo, como humidade, índices de UV se forem muito altos, qualidade do ar e etc. Seja descritivo em forma de texto"
+      "add details to the weather forecast, such as humidity, UV indices if they are very high, air quality, etc. Be descriptive in text form"
     ),
 });
 

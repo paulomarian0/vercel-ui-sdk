@@ -48,16 +48,16 @@ export async function continueConversation(
 		},
 		tools: {
 			getWeather: {
-				description: "Obter o clima para um local específico",
+				description: "Get the weather for a specific location",
 				parameters: z.object({
-					location: z.string().describe("o local para obter o clima"),
+					location: z.string().describe("the location to get the weather for"),
 				}),
 				generate: async function* ({ location }) {
-					yield <div>Carregando dados do clima...</div>;
+					yield <div>Loading weather data...</div>;
 					const weather = await generateObject({
 						model: model,
 						schema: weatherSchema,
-						prompt: `Obtenha o clima com base neste local: ${location}`,
+						prompt: `Get the weather based on this location: ${location}`,
 					});
 					return <WeatherComponent weather={weather.object} />;
 				},
